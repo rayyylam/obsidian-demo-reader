@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+._*
+/.frontend-backups/
+/dist/
+/.env
+/.env.*
+/docs/*.png
+/docs/验证记录.md
+/demo-vault/.obsidian/
+/demo-vault/.trash/
+/demo-vault/2026-11-07.md
+/demo-vault/我的笔记/

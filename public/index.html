@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>笔记随行</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<svg class="symbol-sprite" aria-hidden="true"><defs>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h6c2 0 3 1 3 2 0-1 1-2 3-2h6v15h-6c-2 0-3 1-3 2-1-2-2-2-3-2H3z"/><path d="M12 6v15"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v12H3zM3 6V4h7l2 2h9v2"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7a8 8 0 1 0 0 10M20 3v5h-5"/></symbol>
+<symbol id="i-focus" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><path d="M9 9h6v6H9z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 5h12M8 12h12M8 19h12M3 5h.1M3 12h.1M3 19h.1"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+</defs></svg>
+<div class="app" data-od-id="reader-app">
+ <aside class="sidebar" id="sidebar" aria-label="笔记目录" data-od-id="library-sidebar">
+  <button class="icon-button drawer-heading" aria-label="关闭笔记目录" id="close-drawer" data-od-id="close-drawer"><svg><use href="#i-close"/></svg></button>
+  <div class="brand" data-od-id="reader-brand"><div class="brand-mark"><svg><use href="#i-book"/></svg></div><div><div class="brand-name">笔记随行</div><div class="brand-sub">Markdown 笔记阅读器</div></div></div>
+  <button class="search-launch" id="search-launch" data-od-id="search-launch" aria-haspopup="dialog"><svg><use href="#i-search"/></svg><span>搜索笔记内容</span><kbd>⌘ K</kbd></button>
+  <div class="library-label"><span>我的笔记</span><div class="library-actions"><span class="note-count">载入中</span><button class="refresh-button sidebar-refresh" id="mobile-refresh-button" title="刷新并重新扫描知识库" data-action="refresh"><svg><use href="#i-refresh"/></svg><span>刷新</span></button></div></div>
+  <nav class="library" id="library" aria-label="知识库笔记" data-od-id="note-library"></nav>
+  <div class="sidebar-bottom" data-od-id="vault-status">
+   <button class="vault-button" id="source-button" data-od-id="source-button" aria-haspopup="dialog"><svg><use href="#i-folder"/></svg><span><strong>演示知识库</strong><small id="vault-summary">正在连接演示知识库</small></span><svg class="chevron"><use href="#i-chevron"/></svg></button>
+  </div>
+ </aside>
+ <main class="workspace" data-od-id="reading-workspace">
+  <header class="topbar" data-od-id="reader-toolbar">
+   <div class="breadcrumb"><svg><use href="#i-folder"/></svg><span>演示知识库</span><span class="slash">/</span><span id="crumb-folder">笔记</span><span class="slash">/</span><span class="current" id="crumb-note">载入中</span></div>
+   <div class="mobile-brand"><svg><use href="#i-book"/></svg><span>笔记随行</span></div>
+   <div class="top-tools">
+    <span class="read-only"><svg><use href="#i-lock"/></svg>只读模式</span><span class="tool-divider"></span>
+    <button class="icon-button settings-top" id="settings-top" aria-label="阅读设置" aria-expanded="false" aria-controls="settings" title="阅读设置" data-od-id="reading-settings-button"><span class="type-icon">Aa</span></button>
+    <button class="icon-button" id="focus-button" aria-label="进入专注阅读" aria-pressed="false" title="专注阅读" data-od-id="focus-mode-button"><svg><use href="#i-focus"/></svg></button>
+    <button class="refresh-button" id="refresh-button" title="刷新并重新扫描知识库" data-od-id="refresh-button"><svg><use href="#i-refresh"/></svg><span>刷新</span></button>
+   </div>
+  </header>
+  <div class="connection-status" id="connection-status" role="status" data-od-id="connection-status" hidden><span id="connection-message"></span><button data-action="refresh">重新连接</button></div>
+  <div class="reader-scroll" id="reader-scroll" tabindex="0" aria-label="笔记正文阅读区" data-od-id="reading-scroll-region">
+   <div class="reading-layout">
+    <div class="document" id="document" data-od-id="note-document">
+     <header class="document-header" data-od-id="note-header"><div class="document-eyebrow"><span class="category-tag" id="category">笔记</span><span class="eyebrow-line"></span><span>一份实践笔记</span></div><h1 id="note-title" data-od-id="note-title">正在打开笔记…</h1><div class="document-meta"><svg><use href="#i-note"/></svg><span>演示笔记</span><span class="dot">·</span><span id="word-count"></span><span class="dot">·</span><svg><use href="#i-clock"/></svg><span id="read-time"></span></div></header>
+     <article class="article-content" id="article" aria-labelledby="note-title" data-od-id="note-article"></article>
+     <nav class="note-pagination" id="pagination" aria-label="上一篇和下一篇" data-od-id="note-pagination"></nav>
+     <footer class="document-footer" data-od-id="note-footer"><span>笔记留在电脑，想法随身而行。</span><span>演示内容 · 仅供阅读</span></footer>
+    </div>
+    <aside class="toc-rail" aria-label="本篇目录" data-od-id="article-outline"><div class="rail-label"><span>本篇目录</span><svg><use href="#i-list"/></svg></div><nav class="toc-list" id="toc"></nav><div class="rail-foot"><p>读到这里，也是一点积累。</p><span>阅读进度 <strong id="progress-text">0%</strong></span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div></aside>
+   </div>
+  </div>
+ </main>
+</div>
+<button class="scrim" id="scrim" aria-label="关闭笔记目录" tabindex="-1"></button>
+<nav class="mobile-dock" aria-label="阅读工具" data-od-id="mobile-reading-navigation"><button id="mobile-menu" aria-expanded="false" aria-controls="sidebar" data-od-id="mobile-library-button"><svg><use href="#i-book"/></svg>笔记目录</button><button id="mobile-search" aria-haspopup="dialog" data-od-id="mobile-search-button"><svg><use href="#i-search"/></svg>搜索</button><button id="mobile-settings" aria-expanded="false" aria-controls="settings" data-od-id="mobile-settings-button"><span class="mobile-type-icon">Aa</span>阅读设置</button></nav>
+<section class="popover" id="settings" aria-label="阅读设置" data-od-id="reading-settings" hidden><h2 class="popover-title">让阅读更舒服</h2><div class="setting-label"><span>正文字号</span><span>14–22 像素</span></div><div class="font-stepper"><button id="font-minus" aria-label="减小字号" data-od-id="font-minus">−</button><output id="font-value" aria-live="polite">16</output><button id="font-plus" aria-label="增大字号" data-od-id="font-plus">＋</button></div><div class="setting-label"><span>正文宽度</span><span>桌面端生效</span></div><div class="segmented" role="group" aria-label="正文宽度"><button id="width-normal" aria-pressed="true" data-od-id="width-normal">舒适</button><button id="width-wide" aria-pressed="false" data-od-id="width-wide">宽阔</button></div><button class="settings-reset" id="settings-reset" data-od-id="reset-settings">恢复默认设置</button></section>
+<div class="overlay" id="search-overlay" hidden><section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索笔记" data-od-id="search-dialog"><div class="search-field"><svg><use href="#i-search"/></svg><input id="search-input" type="search" placeholder="搜索标题或正文…" autocomplete="off" aria-label="搜索标题或正文" data-od-id="search-input"><button class="icon-button" id="search-close" aria-label="关闭搜索" data-od-id="close-search"><svg><use href="#i-close"/></svg></button></div><div class="search-summary" id="search-summary" role="status"></div><div class="search-results" id="search-results" data-od-id="search-results"></div><div class="search-footer"><span>↑ ↓ 选择笔记　↵ 打开</span><span>仅搜索演示知识库</span></div></section></div>
+<div class="overlay" id="source-overlay" hidden><section class="source-dialog" role="dialog" aria-modal="true" aria-labelledby="source-title" data-od-id="source-dialog"><div class="source-heading"><h2 id="source-title">关于这个知识库</h2><button class="icon-button" id="source-close" aria-label="关闭知识库信息"><svg><use href="#i-close"/></svg></button></div><p>读取器使用项目文件夹内的演示知识库。</p><code id="vault-path">正在读取知识库位置…</code><p>要试读自己的内容，请把选好的 Markdown 和相关图片复制到这个目录，然后点击「刷新」。</p><p class="source-caption">笔记仅供阅读。阅读设置保存在当前浏览器中。</p></section></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
